@@ -1,8 +1,11 @@
 import axios from "axios";
 
-async function recipes() {
+export async function getRecipes() {
   const { data } = await axios.get("http://localhost:80/api/recipes");
   return data.data;
 }
 
-export default recipes;
+export async function getRecipeById(id: string ) {
+  const { data } = await axios.get(`http://localhost:80/api/recipes?id=${id}`);
+  return data.data;
+}
