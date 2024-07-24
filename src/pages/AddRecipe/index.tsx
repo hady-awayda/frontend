@@ -1,15 +1,15 @@
-import LoginForm from "../../components/Forms/Login";
+import CreateRecipe from "../../components/Forms/CreateRecipe";
 import Footer from "../../components/Layout/Footer";
 import Navbar from "../../components/Layout/Navbar";
 
-const Login = () => {
+const AddRecipe = () => {
   return (
     <>
       <Navbar />
-      <LoginForm />
+      <CreateRecipe />
       <Footer />
     </>
   );
 };
 
-export default Login;
+export default AddRecipe;

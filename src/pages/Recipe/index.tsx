@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getComments, getRecipeById } from "../../data/remote/recipes";
 import Comments from "../../components/Structural/Comments";
-import CommentForm from "../../components/Cards/Comment";
+import CommentForm from "../../components/Forms/Comment";
 
 const RecipePage = () => {
   const { id } = useParams<{ id: string }>();

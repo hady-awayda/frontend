@@ -47,3 +47,27 @@ export async function postComment(
     console.error(error.message);
   }
 }
+
+export async function postRecipe(recipeData: {
+  name: string;
+  ingredients: string;
+  steps: string;
+  user_id: number;
+}) {
+  try {
+    const response = await axios.post(
+      "http://localhost:80/api/recipes",
+      recipeData,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          // Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error: any) {
+    console.error("Error posting recipe:", error.message);
+    throw error;
+  }
+}
