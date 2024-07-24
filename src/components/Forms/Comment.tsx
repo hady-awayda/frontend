@@ -1,21 +1,20 @@
 import { useState } from "react";
 import { postComment } from "../../data/remote/recipes";
+import { getIdFromJWT } from "../../data/local/JWTId";
 
 const CommentForm = (id: { id: string }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [rating, setRating] = useState<number>(0);
-  const [user_id, setUserId] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(id);
-    await postComment(id.id, title, description, rating, user_id);
+
+    await postComment(id.id, title, description, rating);
 
     setTitle("");
     setDescription("");
     setRating(0);
-    setUserId("");
   };
 
   return (
@@ -52,16 +51,6 @@ const CommentForm = (id: { id: string }) => {
           className="w-full px-3 py-2 border border-gray-300 rounded"
           min="0"
           max="5"
-          required
-        />
-      </div>
-      <div className="mb-4">
-        <label className="block text-gray-700">User id</label>
-        <input
-          type="text"
-          value={user_id}
-          onChange={(e) => setUserId(e.target.value)}
-          className="w-full px-3 py-2 border border-gray-300 rounded"
           required
         />
       </div>

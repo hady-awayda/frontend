@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { postLogin } from "../../data/remote/auth";
 import decodeJwtToken from "../helpers/decodeJWT";
+import { login } from "../../data/remote/auth";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -10,7 +10,7 @@ const LoginForm = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const data = await postLogin(email, password);
+      const data = await login(email, password);
       if (data.token) {
         const decodedToken = decodeJwtToken(data.token);
 

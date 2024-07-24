@@ -5,25 +5,15 @@ const CreateRecipe = () => {
   const [name, setName] = useState("");
   const [ingredients, setIngredients] = useState("");
   const [steps, setSteps] = useState("");
-  const [userId, setUserId] = useState<number | "">("");
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (userId === "") {
-      console.error("User ID must be a number.");
-      return;
-    }
-    const recipeData = {
-      name,
-      ingredients,
-      steps,
-      user_id: Number(userId),
-    };
-    await postRecipe(recipeData);
+
+    await postRecipe(name, ingredients, steps);
+
     setName("");
     setIngredients("");
     setSteps("");
-    setUserId("");
   };
 
   return (
@@ -60,20 +50,6 @@ const CreateRecipe = () => {
           <textarea
             value={steps}
             onChange={(e) => setSteps(e.target.value)}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
-            User ID
-          </label>
-          <input
-            type="number"
-            value={userId}
-            onChange={(e) =>
-              setUserId(e.target.value ? Number(e.target.value) : "")
-            }
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             required
           />

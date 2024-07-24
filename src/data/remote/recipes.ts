@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getIdFromJWT } from "../local/JWTId";
 
 export async function getRecipes() {
   const { data } = await axios.get("http://localhost:80/api/recipes");
@@ -21,9 +22,11 @@ export async function postComment(
   recipe_id: string,
   title: string,
   description: string,
-  rating: number,
-  user_id: string
+  rating: number
 ) {
+  const user_id = getIdFromJWT();
+  const token = JSON.parse(localStorage.getItem("jwtData") || "{}").token;
+
   try {
     console.log(`http://localhost:80/api/comments?recipe_id=${recipe_id}`);
     await axios.post(
@@ -39,7 +42,7 @@ export async function postComment(
       {
         headers: {
           "Content-Type": "application/json",
-          // Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       }
     );
@@ -48,20 +51,27 @@ export async function postComment(
   }
 }
 
-export async function postRecipe(recipeData: {
-  name: string;
-  ingredients: string;
-  steps: string;
-  user_id: number;
-}) {
+export async function postRecipe(
+  name: string,
+  ingredients: string,
+  steps: string
+) {
+  const user_id = getIdFromJWT();
+  const token = JSON.parse(localStorage.getItem("jwtData") || "{}").token;
+
   try {
     const response = await axios.post(
       "http://localhost:80/api/recipes",
-      recipeData,
+      {
+        name,
+        ingredients,
+        steps,
+        user_id,
+      },
       {
         headers: {
           "Content-Type": "application/json",
-          // Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       }
     );
