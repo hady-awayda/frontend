@@ -38,8 +38,6 @@ const RecipePage = () => {
     }
   }, [id]);
 
-  console.log(comments);
-
   return (
     <>
       <Navbar />
@@ -53,7 +51,7 @@ const RecipePage = () => {
         ) : (
           <p>No comments</p>
         )}
-        <CommentForm recipeId={id} />
+        <CommentForm {...{ id }} />
       </div>
       <Footer />
     </>

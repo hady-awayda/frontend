@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { postComment } from "../../data/remote/recipes";
 
-const CommentForm = (recipeId: string) => {
+const CommentForm = (id: { id: string }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [rating, setRating] = useState<number>(0);
@@ -9,8 +9,8 @@ const CommentForm = (recipeId: string) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    await postComment(recipeId, title, description, rating, user_id);
+    console.log(id);
+    await postComment(id.id, title, description, rating, user_id);
 
     setTitle("");
     setDescription("");

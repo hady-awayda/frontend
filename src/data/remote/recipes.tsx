@@ -18,15 +18,16 @@ export async function getComments(id: string) {
 }
 
 export async function postComment(
-  id: string,
+  recipe_id: string,
   title: string,
   description: string,
   rating: number,
   user_id: string
 ) {
   try {
+    console.log(`http://localhost:80/api/comments?recipe_id=${recipe_id}`);
     await axios.post(
-      `http://localhost:80/api/comments?recipe_id=${id}`,
+      `http://localhost:80/api/comments?recipe_id=${recipe_id}`,
       {
         title,
         description,
