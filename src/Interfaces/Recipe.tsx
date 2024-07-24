@@ -1,5 +1,5 @@
 export interface RecipeCardProps {
-  id: number;
+  id: string;
   name: string;
   ingredients: string;
   steps: string;

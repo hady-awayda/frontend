@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getIdFromJWT } from "../local/JWTId";
+import { getIdFromJWT } from "../local/JWT";
 
 export async function getRecipes() {
   const { data } = await axios.get("http://localhost:80/api/recipes");
@@ -79,5 +79,29 @@ export async function postRecipe(
   } catch (error: any) {
     console.error("Error posting recipe:", error.message);
     throw error;
+  }
+}
+
+export async function postFavorite(recipe_id: string) {
+  try {
+    const user_id = getIdFromJWT();
+    const token = JSON.parse(localStorage.getItem("jwtData") || "{}").token;
+
+    const response = await axios.post(
+      "http://localhost:80/api/favorites",
+      {
+        user_id,
+        recipe_id,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error: any) {
+    throw new Error(error.response.data.message || "Failed to add favorite");
   }
 }

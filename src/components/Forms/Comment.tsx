@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { postComment } from "../../data/remote/recipes";
-import { getIdFromJWT } from "../../data/local/JWTId";
 
 const CommentForm = (id: { id: string }) => {
   const [title, setTitle] = useState("");
