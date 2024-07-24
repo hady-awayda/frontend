@@ -1,5 +1,5 @@
-import Footer from "../../components/Structural/Footer";
-import Navbar from "../../components/Structural/Navbar";
+import Footer from "../../components/Layout/Footer";
+import Navbar from "../../components/Layout/Navbar";
 
 const Register = () => {
   return (
